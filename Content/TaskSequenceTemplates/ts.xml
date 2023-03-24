@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<sequence version="3.00" name="Post OS Installation Task Sequence" description="A task sequence for configuring an Operating System after install">
+  <group expand="true" name="Applications" description="" disable="false" continueOnError="false">
+    <action />
+    <step type="BDD_RunPowerShellAction" name="Determine Application List" description="Uses a powershell script to determine which of the enabled applications within enabled folders should be installed on the device currently being deployed." disable="false" continueOnError="false" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ScriptName" property="ScriptName">%CustomContentPath%\Invoke-OSDApplicationList\Invoke-OSDApplicationList.ps1</variable>
+        <variable name="Parameters" property="Parameters"></variable>
+        <variable name="PackageID" property="PackageID" />
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIPowerShell.wsf</action>
+    </step>
+    <step type="BDD_InstallApplication" name="Install Application List" description="" disable="false" continueOnError="true" runIn="WinPEandFullOS" successCodeList="0 3010">
+      <defaultVarList>
+        <variable name="ApplicationGUID" property="ApplicationGUID"></variable>
+        <variable name="ApplicationSuccessCodes" property="ApplicationSuccessCodes">0 1 3010</variable>
+      </defaultVarList>
+      <action>cscript.exe "%SCRIPTROOT%\ZTIApplications.wsf"</action>
+    </step>
+  </group>
+</sequence>
