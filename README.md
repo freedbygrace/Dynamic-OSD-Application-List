@@ -20,9 +20,12 @@ To skip in all cases, just simply use "$False" without the quotes.
 
 Setting the right mixture of condition and installation order will provide a super smooth and consistent installation experience.
 
-Example: VMWare Tools   
+Example: VMWare Tools
+ 
 Installation Order = 1
+
 Condition = ($ComputerSystem.Manufacturer -imatch '.*VM.*Ware.*')
+
 This would ensure that VMWare Tools gets installed first only VMWare virtual machines.
 
 Any variable that will be available during the execution of the Invoke-OSDApplicationList.ps1 powershell script can be used within a condition.
