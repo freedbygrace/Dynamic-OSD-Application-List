@@ -16,6 +16,7 @@ Updates the 'Version' property of each application with the installation order (
 Updates the 'Language' property of each application within the Applications.xml with a powershell based condition that will determine if the application will be installed during a task sequence.
 
 To install in all cases, just simply use "$True" without the quotes.
+
 To skip in all cases, just simply use "$False" without the quotes.
 
 Setting the right mixture of condition and installation order will provide a super smooth and consistent installation experience.
@@ -30,8 +31,12 @@ This would ensure that VMWare Tools gets installed first only VMWare virtual mac
 
 Any variable that will be available during the execution of the Invoke-OSDApplicationList.ps1 powershell script can be used within a condition.
 
-Dynamically creates 'MandatoryApplicationXXX' task sequence variables with the GUIDs of MDT application objects to install on a device during operating system deployment.
+Dynamically creates 'MandatoryApplicationsXXX' task sequence variables with the GUIDs of MDT application objects to install on a device during operating system deployment.
           
 Individual applications or entire application folders can be disabled to exclude the application(s) from being considered by the script during deployment.
 
 Application(s) that have already been installed by the task sequence whose GUID is stored within a 'InstalledApplicationsXXX' variable will be skipped if this script is executed multiple times during a task sequence.
+
+After all of this is completed, just add a run powershell script step somewhere in your task sequence that executes the 'Invoke-OSDApplicationList.ps1' powershell script.
+
+The Applications.xml and ApplicationGroups.xml can be specified as script parameters, but by default, they will be found automatically using task sequence variables during run time.
