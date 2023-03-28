@@ -40,3 +40,5 @@ Application(s) that have already been installed by the task sequence whose GUID 
 After all of this is completed, just add a run powershell script step somewhere in your task sequence that executes the 'Invoke-OSDApplicationList.ps1' powershell script.
 
 The Applications.xml and ApplicationGroups.xml can be specified as script parameters, but by default, they will be found automatically using task sequence variables during run time.
+
+This totally eliminates the constant modification of task sequences to accomodate application addition, removal, reordering, replacement, etc...
